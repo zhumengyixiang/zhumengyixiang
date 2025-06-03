@@ -14,13 +14,16 @@
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #fff;
-      padding: 20px 40px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	background-color: #fff;
+  	padding: 20px 40px;
+  	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  	position: sticky;
+  	top: 0;
+  	z-index: 999;
+}
 
     nav a {
       margin-left: 20px;
@@ -165,7 +168,14 @@
 	  
 	<blockquote>&nbsp;</blockquote>
 	<div class="iframe-container">
-	<iframe width="700" height="450" src="https://www.youtube.com/embed/n6Pn-NXrwCY?si=YbApfqdE7ypvv2ef" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+	<iframe width="700" height="450"
+  	src="https://www.youtube.com/embed/n6Pn-NXrwCY?loop=1&playlist=n6Pn-NXrwCY"
+  	title="YouTube video player"
+  	frameborder="0"
+  	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  	referrerpolicy="strict-origin-when-cross-origin"
+  	allowfullscreen>
+	</iframe> 
 	</div>  
 
     <h2>目的</h2>
