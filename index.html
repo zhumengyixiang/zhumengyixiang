@@ -75,80 +75,62 @@
       border-radius: 8px;
       cursor: pointer;
     }
-	 .mySlides img {
+	 .slideshow-container {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+}
+
+.mySlides {
+  display: none;
+}
+
+img {
+  vertical-align: middle;
+  width: 100%;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.3s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.dot-container {
+  text-align: center;
+  padding: 15px;
 }
 
 .dot {
+  cursor: pointer;
   height: 12px;
   width: 12px;
-  margin: 5px 4px;
-  background-color: #ccc;
+  margin: 0 4px;
+  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.3s;
 }
 
-.active {
-  background-color: #b87e63;
+.active, .dot:hover {
+  background-color: #717171;
 }
 
-	@media (max-width: 768px) {
-      header {
-        padding: 20px 5%;
-      }
-
-      nav {
-        justify-content: center;
-        text-align: center;
-      }
-	
-      nav a {
-        margin: 10px;
-        display: inline-block;
-      }
-
-      main {
-        padding: 0 15px;
-      }
-
-      footer button {
-        width: 100%;
-        max-width: 300px;
-        font-size: 18px;
-      }
-	 .iframe-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; 
-    height: 0;
-    overflow: hidden;
-    margin:  0px ;
-    max-width: 900px; 
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-
-  .iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
- .slideshow-container {
-    padding: 0 10px;
-  }
-
-  .mySlides img {
-    border-radius: 8px;
-  }
-}
   </style>
 </head>
 <body>
@@ -158,6 +140,7 @@
       <a href="index.html">首頁</a>
       <a href="concept.html">展覽理念</a>
 	  <a href="feedback.html">留言與回饋</a>
+		<a href="news.html">每月新焦點</a>
 		
     </nav>
   </header>
@@ -187,104 +170,73 @@
     <p>我們希望透過沉浸式的虛擬體驗，使參觀者「看到、聽到、感受到」移工的現實處境，進而喚起大家的同理心。</p>
 	<h2>展覽內容</h2>
 	<ul></ul>
-	<div id="slide" class="slideshow-container">
+<!-- Slideshow container -->
+<div class="slideshow-container">
 
-	<div id="p1" class="mySlides fade">
-  <div class="numbertext">1 / 14</div>
-  <img src="p1.png" style="width:100%">
-  </div>
+  <!-- Slides -->
+  <div class="mySlides fade"><img src="p1.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p2.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p3.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p4.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p5.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p6.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p7.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p8.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p9.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p10.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p11.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p12.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p13.png" style="width:100%"></div>
+  <div class="mySlides fade"><img src="p14.png" style="width:100%"></div>
 
-	<div id="p2" class="mySlides fade">
-  <div class="numbertext">2 / 14</div>
-  <img src="p2.png" style="width:100%">
-	</div>
-
-<div id="p3" class="mySlides fade">
-  <div class="numbertext">3 / 14</div>
-  <img src="p3.png" style="width:100%">
-</div>
-	<div id="p4" class="mySlides fade">
-  <div class="numbertext">4 / 14</div>
-  <img src="p4.png" style="width:100%">
-</div>
-	<div id="p5" class="mySlides fade">
-  <div class="numbertext">5 / 14</div>
-  <img src="p5.png" style="width:100%">
-</div>
-	<div id="p6" class="mySlides fade">
-  <div class="numbertext">6 / 14</div>
-  <img src="p6.png" style="width:100%">
-</div>
-	<div id="p7" class="mySlides fade">
-  <div class="numbertext">7 / 14</div>
-  <img src="p7.png" style="width:100%">
-</div>
-	<div id="p8" class="mySlides fade">
-  <div class="numbertext">8 / 14</div>
-  <img src="p8.png" style="width:100%">
-</div>
-	<div id="p9" class="mySlides fade">
-  <div class="numbertext">9 / 14</div>
-  <img src="p9.png" style="width:100%">
-</div><div id="p10" class="mySlides fade">
-  <div class="numbertext">10 / 14</div>
-  <img src="p10.png" style="width:100%">
-</div>
-	<div id="p11" class="mySlides fade">
-  <div class="numbertext">11 / 14</div>
-  <img src="p11.png" style="width:100%">
-</div>
-	<div id="p12" class="mySlides fade">
-  <div class="numbertext">12 / 14</div>
-  <img src="p12.png" style="width:100%">
-</div>
-	<div id="p13" class="mySlides fade">
-  <div class="numbertext">13 / 14</div>
-  <img src="p13.png" style="width:100%">
-</div>
- <div id="p14" class="mySlides fade">
-  <div class="numbertext">14 / 14</div>
-  <img src="p14.png" style="width:100%">
+  <!-- Navigation arrows -->
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
 </div>
 
+<!-- Dots -->
+<div class="dot-container">
+  <!-- 產生14個點 -->
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+  <span class="dot" onclick="currentSlide(4)"></span>
+  <span class="dot" onclick="currentSlide(5)"></span>
+  <span class="dot" onclick="currentSlide(6)"></span>
+  <span class="dot" onclick="currentSlide(7)"></span>
+  <span class="dot" onclick="currentSlide(8)"></span>
+  <span class="dot" onclick="currentSlide(9)"></span>
+  <span class="dot" onclick="currentSlide(10)"></span>
+  <span class="dot" onclick="currentSlide(11)"></span>
+  <span class="dot" onclick="currentSlide(12)"></span>
+  <span class="dot" onclick="currentSlide(13)"></span>
+  <span class="dot" onclick="currentSlide(14)"></span>
 </div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span>
-  <span class="dot"></span> 
-</div>
+	  <br>
 <script>
-let slideIndex = 0;
-showSlides();
+let slideIndex = 1;
+showSlides(slideIndex);
 
-function showSlides() {
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) { slideIndex = 1 }
+  if (n < 1) { slideIndex = slides.length }
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+    slides[i].style.display = "none";
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+    dots[i].classList.remove("active");
   }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); 
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].classList.add("active");
 }
 </script>
 	
