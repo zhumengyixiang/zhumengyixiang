@@ -72,6 +72,21 @@
       cursor: pointer;
     }
 
+#con02_div {
+    background-color: #EDDFCC;
+    min-height: 50px;
+    width: 50%;
+    display: table;
+	float: right;
+} 
+#con02_div ul{
+	padding-left: 0px;
+	margin: 0;
+	list-style-type: none;
+}
+.space_top{
+	margin-top: 10px;
+}
 .slideshow-container {
   position: relative;
   width: 800px;      /* ✅ 固定寬度 */
@@ -163,7 +178,12 @@
     height: 350px;
   }
 }
-
+#con02_div {
+	width: 66%;
+	float: right;
+	
+	
+} 
 
 /* 手機（寬度小於 600px） */
 @media (max-width: 600px) {
