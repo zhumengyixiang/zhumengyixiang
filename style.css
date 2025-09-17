@@ -75,7 +75,7 @@
 #con02_div {
     background-color: #EDDFCC;
     min-height: 50px;
-    width: 50%;
+    width: 33%;
     display: table;
 	float: right;
 } 
@@ -179,8 +179,8 @@
   }
 }
 #con02_div {
-	width: 66%;
-	float: right;
+    width: 33%;
+    float: right;
 	
 	
 } 
@@ -202,4 +202,3 @@
     width: 10px;
   }
 }
-
