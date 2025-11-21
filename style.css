@@ -208,6 +208,7 @@
   outline-offset: 3px;
 }
 
+
 /* 平板裝置（寬度小於 900px） */
 @media (max-width: 900px) {
   .slideshow-container {
@@ -239,3 +240,46 @@
     width: 10px;
   }
 }
+
+/* 手機導覽列調整 */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1001;
+  }
+
+  #nav-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  #nav-menu a {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+  }
+
+  #nav-menu.show {
+    display: flex;
+  }
+}
+
+
