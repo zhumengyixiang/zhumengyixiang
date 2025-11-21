@@ -8,16 +8,17 @@
 	<meta name="google-site-verification" content="XOu3dvWdkn-k-QtIi80PLe1rVMvQQj3z6hP1VrvrOTI" />
 	</head>
 <body>
-  <header>
-    <div><strong>築夢異鄉</strong></div>
-    <nav>
-      <a href="index.html">首頁</a>
-      <a href="concept.html">展覽理念</a>
-	  <a href="feedback.html">留言與回饋</a>
-	  <a href="commu.html">文化交流區</a>
-		<a href="news.html">每月新焦點</a>
-    </nav>
-  </header>
+ <header>
+  <div class="logo-title"><strong>築夢異鄉</strong></div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="nav-menu">
+    <a href="index.html">首頁</a>
+    <a href="concept.html">展覽理念</a>
+    <a href="feedback.html">留言與回饋</a>
+    <a href="commu.html">文化交流區</a>
+    <a href="news.html">每月新焦點</a>
+  </nav>
+</header>
 
   <div class="container">
     <h1>展覽簡介</h1>
@@ -25,14 +26,7 @@
 	  
 	<blockquote>&nbsp;</blockquote>
 	<div class="iframe-container">
-	<iframe width="900" height="576"
-  	src="https://www.youtube.com/embed/n6Pn-NXrwCY?loop=1&playlist=n6Pn-NXrwCY"
-  	title="YouTube video player"
-  	frameborder="0"
-  	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  	referrerpolicy="strict-origin-when-cross-origin"
-  	allowfullscreen>
-	</iframe> 
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/n6Pn-NXrwCY?si=bTN3EsgjgqhpZzW_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>  
 
     <h2>目的</h2>
@@ -111,6 +105,10 @@ function showSlides(n) {
   }
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].classList.add("active");
+}
+function toggleMenu() {
+  const nav = document.getElementById("nav-menu");
+  nav.classList.toggle("show");
 }
 </script>
 	
