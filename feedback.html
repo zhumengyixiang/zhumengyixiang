@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>築夢異鄉｜留言與回饋</title>
 <link rel="stylesheet" href="style.css">
+	  <link rel="icon" href="favicon.png" type="image/png" />
+
 </head>
 <body>
   <header>
@@ -19,7 +21,13 @@
     <a href="news.html">每月新焦點</a>
   </nav>
 </header>
-
+	<script>
+  // 🟦 漢堡選單控制（放在 header.html 內才能正常運作）
+  function toggleMenu() {
+    const nav = document.getElementById("nav-menu");
+    nav.classList.toggle("show");
+  }
+</script>
   <div class="container">
 
 	  
@@ -43,11 +51,5 @@
     </a>
   </footer>
 </body>
-	<script>
-  // 🟦 漢堡選單控制（放在 header.html 內才能正常運作）
-  function toggleMenu() {
-    const nav = document.getElementById("nav-menu");
-    nav.classList.toggle("show");
-  }
-</script>
+
 </html>

@@ -6,6 +6,8 @@
   <title>築夢異鄉｜展覽理念</title>
 
 	<link rel="stylesheet" href="style.css">
+	  <link rel="icon" href="favicon.png" type="image/png" />
+
 </head>
 <body>
   <header>
@@ -20,7 +22,13 @@
     <a href="news.html">每月新焦點</a>
   </nav>
 </header>
-
+	<script>
+  // 🟦 漢堡選單控制（放在 header.html 內才能正常運作）
+  function toggleMenu() {
+    const nav = document.getElementById("nav-menu");
+    nav.classList.toggle("show");
+  }
+</script>
 
   <div class="container">
     <h1>展覽理念</h1>
@@ -48,11 +56,5 @@
     </a>
   </footer>
 </body>
-	<script>
-  // 🟦 漢堡選單控制（放在 header.html 內才能正常運作）
-  function toggleMenu() {
-    const nav = document.getElementById("nav-menu");
-    nav.classList.toggle("show");
-  }
-</script>
+
 </html>
