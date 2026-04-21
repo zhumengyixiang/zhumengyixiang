@@ -110,12 +110,18 @@
         <p data-start="2081" data-end="2135"><strong data-start="2081" data-end="2095">企業責任與供應鏈壓力</strong>：促使企業將「尊重移工人權」納入採購、永續報告與企業評價標準，成為競爭優勢之一。</p>
       </li>
     </ol>
-    <p>
-	   <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/tfevdju2mwvij6gt" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px"><a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><div style="display:flex;align-items:center;"><img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="創作元素為 Padlet"></div></a></div></div>	 
-			 
-   </p>
-		 <p>&nbsp;</p>
+   <section class="container" style="margin-top: 80px; border-top: 1px solid #ddd; padding-top: 40px;">
+  <h2 style="color: #b87e63;">留言回饋</h2>
+  
+  <div style="background-color: #EDDFCC; padding: 25px; border-radius: 12px; margin-bottom: 40px;">
+    <input type="text" id="username" placeholder="暱稱" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box;">
+    <textarea id="message" rows="3" placeholder="留下你的看法..." style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box;"></textarea>
+    <button onclick="postComment()" id="submit-btn" style="background-color: #b87e63; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;">發表留言</button>
+  </div>
 
+  <div id="loading" style="text-align: center; color: #999;">載入中...</div>
+  <div id="comment-wall" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;"></div>
+</section>
   </div>  
 
   <hr style="margin: 60px 0; border: none; border-top: 1px solid #ccc;">
@@ -133,5 +139,52 @@
     const nav = document.getElementById("nav-menu");
     nav.classList.toggle("show");
   }
+	const mySheetName = '新聞_202510'; 
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwuUoiqRS9ACoCQVVU0HV7xxoUBpO1kPACCfGvBwrLrHf3jT0UFqJm3kXUk3RAowY26/exec';
+
+  window.onload = loadComments;
+
+  function postComment() {
+    const name = document.getElementById('username').value;
+    const content = document.getElementById('message').value;
+    const btn = document.getElementById('submit-btn');
+
+    if (!name || !content) { alert('請填寫完整內容'); return; }
+
+    btn.disabled = true; btn.innerText = '傳送中...';
+
+    const formData = new URLSearchParams();
+    formData.append('name', name);
+    formData.append('content', content);
+    formData.append('sheetName', mySheetName); // 傳送頁面 ID
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(() => {
+        alert('留言成功！');
+        document.getElementById('username').value = '';
+        document.getElementById('message').value = '';
+        loadComments();
+      })
+      .finally(() => { btn.disabled = false; btn.innerText = '發表留言'; });
+  }
+
+  function loadComments() {
+    const wall = document.getElementById('comment-wall');
+    fetch(`${scriptURL}?sheetName=${mySheetName}`) // 指定讀取該分頁
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('loading').style.display = 'none';
+        wall.innerHTML = data.reverse().map(item => `
+          <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 5px solid #b87e63;">
+            <p style="margin: 0 0 10px 0; color: #333;">${escapeHtml(item.content)}</p>
+            <div style="text-align: right; font-size: 13px;">
+              <span style="color: #b87e63; font-weight: bold;">— ${escapeHtml(item.name)}</span>
+            </div>
+          </div>
+        `).join('');
+      });
+  }
+
+  function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 </script>
 </html>
