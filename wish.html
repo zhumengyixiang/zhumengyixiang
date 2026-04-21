@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>築夢異鄉｜許願瓶留言板</title>
+
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* 針對許願瓶頁面的額外風格調校 */
+    .wish-intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* 留言表單樣式 - 參考你的 #EDDFCC 區塊色調 */
+    .wish-form-container {
+      background-color: #EDDFCC;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .submit-wish-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #b87e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-wish-btn:hover {
+      background-color: #a06a52;
+    }
+
+    /* 願望小卡牆 - 網格佈局 */
+    .wish-wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .wish-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-top: 4px solid #b87e63;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s;
+    }
+
+    .wish-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .wish-card .content {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+    }
+
+    .wish-card .author {
+      font-weight: bold;
+      color: #b87e63;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .wish-card .date {
+      font-size: 12px;
+      color: #999;
+      text-align: right;
+    }
+
+    #loading-status {
+      text-align: center;
+      color: #b87e63;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo-title"><strong>築夢異鄉</strong></div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="nav-menu">
+      <a href="index.html">首頁</a>
+      <a href="concept.html">展覽理念</a>
+      <a href="feedback.html">留言與回饋</a>
+      <a href="commu.html">文化交流區</a>
+      <a href="news.html">每月新焦點</a>
+      <a href="news.html">許願瓶留言區</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="wish-intro">
+      <h1>許願瓶留言板</h1>
+      <p>在這片異鄉的土地上，留下你的祝福、故事或願望。</p>
+    </div>
+
+    <div class="wish-form-container">
+      <div class="form-group">
+        <label for="username">暱稱</label>
+        <input type="text" id="username" placeholder="如何稱呼你？">
+      </div>
+      <div class="form-group">
+        <label for="message">我想說的是...</label>
+        <textarea id="message" rows="4" placeholder="在這裡寫下你的心聲..."></textarea>
+      </div>
+      <button class="submit-wish-btn" onclick="postWish()">投遞許願瓶</button>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #ddd; margin: 40px 0;">
+
+    <h2>許願牆</h2>
+    <div id="loading-status">正在從海中撈起願望...</div>
+    <div class="wish-wall" id="wish-wall">
+      </div>
+  </div>
+
+  <footer>
+    <p>深入了解築夢異鄉：</p>
+    <a href="mailto:zhumengyixiang@gmail.com">
+      <button>聯絡我們</button>
+    </a>
+  </footer>
+
+  <script>
+    // 手機版選單切換
+    function toggleMenu() {
+      const nav = document.getElementById("nav-menu");
+      nav.classList.toggle("show");
+    }
+
+    // --- Google Apps Script 串接 ---
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwuUoiqRS9ACoCQVVU0HV7xxoUBpO1kPACCfGvBwrLrHf3jT0UFqJm3kXUk3RAowY26/exec';
+
+    // 頁面加載時自動讀取
+    window.onload = fetchWishes;
+
+    function postWish() {
+      const name = document.getElementById('username').value;
+      const content = document.getElementById('message').value;
+
+      if (!name || !content) {
+        alert('請填寫暱稱與留言內容喔！');
+        return;
+      }
+
+      const btn = document.querySelector('.submit-wish-btn');
+      btn.disabled = true;
+      btn.innerText = '投遞中...';
+
+      const formData = new URLSearchParams();
+      formData.append('name', name);
+      formData.append('content', content);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(res => {
+          alert('願望已成功放入許願瓶！');
+          document.getElementById('username').value = '';
+          document.getElementById('message').value = '';
+          fetchWishes(); // 重新整理列表
+        })
+        .catch(error => {
+          console.error(error);
+          alert('投遞失敗，請檢查網路連線或 GAS 設定');
+        })
+        .finally(() => {
+          btn.disabled = false;
+          btn.innerText = '投遞許願瓶';
+        });
+    }
+
+    function fetchWishes() {
+      const wall = document.getElementById('wish-wall');
+      const status = document.getElementById('loading-status');
+
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          status.style.display = 'none';
+          if (data.length === 0) {
+            status.style.display = 'block';
+            status.innerText = '目前還沒有留言，快來投遞第一個許願瓶吧！';
+            return;
+          }
+          // 將資料反轉，最新留言在最前
+          wall.innerHTML = data.reverse().map(item => `
+            <div class="wish-card">
+              <div class="content">${escapeHtml(item.content)}</div>
+              <div>
+                <div class="author">— ${escapeHtml(item.name)}</div>
+                <div class="date">${new Date(item.timestamp).toLocaleDateString()}</div>
+              </div>
+            </div>
+          `).join('');
+        })
+        .catch(err => {
+          console.error(err);
+          status.innerText = '目前無法載入留言。';
+        });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
